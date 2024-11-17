@@ -70,8 +70,7 @@ module.exports.index=async (req, res) => {
 
   module.exports.destroyListing=async (req, res) => {
     let { id } = req.params;
-    let listing= Listing.findById(id);
-    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
-    req.flash("success","listing Updated sucessfully");
-    res.redirect(`/listings/${id}`);
+    let deletedListing= await Listing.findByIdAndDelete(id);
+    req.flash("sucess","Listing Deleted");
+      res.redirect("/listings");
   };
